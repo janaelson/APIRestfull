@@ -1,13 +1,20 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "postagem")
@@ -23,6 +30,14 @@ public class Postagem {
 
     @Column
     private Date dataCriacao;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+    
+    @OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Comentario> comantarios;
 
 	public Long getId() {
 		return id;

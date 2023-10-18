@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "commentario")
 public class Comentario {
@@ -32,6 +34,7 @@ public class Comentario {
     
     @ManyToOne
     @JoinColumn(name = "id_postagem")
+    @JsonBackReference
     private Postagem postagem;
 
 	public Long getId() {
