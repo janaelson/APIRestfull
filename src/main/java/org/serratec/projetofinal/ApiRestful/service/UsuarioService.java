@@ -16,7 +16,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public List<Usuario> findAll() {
+	public List<UsuarioDTO> findAll() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		/*
 		List<UsuarioDTO> usuariosDTO = new ArrayList<>();
