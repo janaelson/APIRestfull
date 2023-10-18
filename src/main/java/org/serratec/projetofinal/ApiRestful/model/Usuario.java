@@ -1,12 +1,14 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,78 +18,82 @@ import javax.validation.constraints.Size;
 @Table(name = "usuario")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@NotBlank(message = "Nome é obrigatório")
+	@Size(max = 60)
+	private String nome;
+
+	@NotBlank(message = "Sobrenome é obrigatório")
+	@Size(max = 60)
+	private String sobrenome;
+
+	@Email(message = "Email inválido")
+	@Size(max = 60)
+	private String email;
+
+	@NotBlank(message = "Senha é obrigatória")
+	@Size(min = 4, max = 10, message = "A senha deve ter entre {min} e {max} caracteres")
+	@Column(nullable = false, length = 10)
+	private String senha;
+
+	@Column
+	private Date dataNascimento;
 	
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+	@ManyToMany(mappedBy = "seguidores")
+    private List<Relacionamento> seguidos;
 
-	    @NotBlank(message = "Nome é obrigatório")
-	    @Size(max = 60)
-	    private String nome;
+    @ManyToMany(mappedBy = "seguidos")
+    private List<Relacionamento> seguidores;
 
-	    @NotBlank(message = "Sobrenome é obrigatório")
-	    @Size(max = 60)
-	    private String sobrenome;
+	public Long getId() {
+		return id;
+	}
 
-	    @Email(message = "Email inválido")
-	    @Size(max = 60)
-	    private String email;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-	    @NotBlank(message = "Senha é obrigatória")
-	    @Size(min = 4, max = 10, message = "A senha deve ter entre {min} e {max} caracteres")
-	    @Column(nullable = false, length = 10)
-	    private String senha;
+	public String getNome() {
+		return nome;
+	}
 
-	    @Column
-	    private Date dataNascimento;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-		public Long getId() {
-			return id;
-		}
+	public String getSobrenome() {
+		return sobrenome;
+	}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
 
-		public String getNome() {
-			return nome;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-		public String getSobrenome() {
-			return sobrenome;
-		}
+	public String getSenha() {
+		return senha;
+	}
 
-		public void setSobrenome(String sobrenome) {
-			this.sobrenome = sobrenome;
-		}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-		public String getEmail() {
-			return email;
-		}
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
-		public String getSenha() {
-			return senha;
-		}
-
-		public void setSenha(String senha) {
-			this.senha = senha;
-		}
-
-		public Date getDataNascimento() {
-			return dataNascimento;
-		}
-
-		public void setDataNascimento(Date dataNascimento) {
-			this.dataNascimento = dataNascimento;
-		}
-	    
-	    
 }
