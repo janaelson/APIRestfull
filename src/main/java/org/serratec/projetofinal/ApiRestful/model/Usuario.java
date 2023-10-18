@@ -1,18 +1,22 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "usuario")
@@ -42,11 +46,8 @@ public class Usuario {
 	@Column
 	private Date dataNascimento;
 	
-	@ManyToMany(mappedBy = "seguidores")
-    private List<Relacionamento> seguidos;
-
-    @ManyToMany(mappedBy = "seguidos")
-    private List<Relacionamento> seguidores;
+	@OneToMany(mappedBy = "id.relacionamento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Relacionamento> Relacionamento = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -95,5 +96,14 @@ public class Usuario {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+	public Set<Relacionamento> getRelacionamento() {
+		return Relacionamento;
+	}
+
+	public void setRelacionamento(Set<Relacionamento> relacionamento) {
+		Relacionamento = relacionamento;
+	}
+	
 
 }

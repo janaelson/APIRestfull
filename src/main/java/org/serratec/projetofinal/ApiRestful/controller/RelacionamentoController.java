@@ -50,7 +50,7 @@ public class RelacionamentoController {
     public ResponseEntity<Relacionamento> atualizar(@PathVariable Long id, @Valid @RequestBody Relacionamento relacionamento) {
         Optional<Relacionamento> relacionamentoOpt = relacionamentoRepository.findById(id);
         if (relacionamentoOpt.isPresent()) {
-        	relacionamento.setId(id);
+        	relacionamento.getId();
             relacionamentoRepository.save(relacionamento);
             return ResponseEntity.ok(relacionamento);
         } else {

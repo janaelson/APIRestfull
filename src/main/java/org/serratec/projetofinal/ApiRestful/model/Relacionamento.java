@@ -1,54 +1,49 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "relacionamento")
 public class Relacionamento {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_relationship")
-	private Long id;
+	@EmbeddedId
+	private RelacionamentoPK id = new RelacionamentoPK();
 
-	@Column
-	private Date dataInicioSeguimento;
+	@Column(name = "data_inicio")
+	private LocalDate dataInicio;
 
-	@ManyToMany
-	@JoinTable(name = "seguidores_seguidos")
-	@JoinColumn(name = "seguidor_id")
-	@JoinColumn(name = "seguido_id")
+	public Relacionamento() {
+		super();
+	}
 
-	private List<Usuario> seguidores;
+	public Relacionamento(Usuario usuario, Usuario usuarioseguido) {
+		super();
+		this.id.setUsuario(usuario);
+		this.id.setUsuarioseguido(usuarioseguido);
+		this.dataInicio = LocalDate.now();
+	}
 
-	@ManyToMany(mappedBy = "seguidores")
-	private List<Usuario> seguidos;
-
-	public Long getId() {
+	public RelacionamentoPK getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(RelacionamentoPK id) {
 		this.id = id;
 	}
 
-	public Date getDataInicioSeguimento() {
-		return dataInicioSeguimento;
+	public LocalDate getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDataInicioSeguimento(Date dataInicioSeguimento) {
-		this.dataInicioSeguimento = dataInicioSeguimento;
+	public void setDataInicio(LocalDate dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 }
