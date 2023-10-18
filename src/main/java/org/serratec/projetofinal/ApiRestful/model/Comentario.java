@@ -21,7 +21,7 @@ public class Comentario {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_comment")
+    @Column(name = "id_comentario")
     private Long id;
 
     @NotBlank(message = "Digite o texto")
