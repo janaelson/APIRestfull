@@ -1,6 +1,6 @@
 package org.serratec.projetofinal.ApiRestful.DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
@@ -13,7 +13,7 @@ public class UsuarioDTO {
 
 	private String email;
 
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 
 	private List<RelacionamentoDTO> relacionamennto;
 
@@ -56,11 +56,11 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

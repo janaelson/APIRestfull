@@ -1,5 +1,6 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,10 +45,10 @@ public class Usuario {
 	private String senha;
 
 	@Column
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
-	@OneToMany(mappedBy = "id.usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Relacionamento> Relacionamento = new ArrayList<>();
+	@OneToMany(mappedBy = "id.usuarioseguido", cascade = CascadeType.ALL)
+	private List<Relacionamento> relacionamento = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -89,20 +90,20 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
 	public List<Relacionamento> getRelacionamento() {
-		return Relacionamento;
+		return relacionamento;
 	}
 
 	public void setRelacionamento(List<Relacionamento> relacionamento) {
-		Relacionamento = relacionamento;
+		this.relacionamento = relacionamento;
 	}
 
 }
