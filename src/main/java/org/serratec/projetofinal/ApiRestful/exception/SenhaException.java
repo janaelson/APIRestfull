@@ -1,4 +1,4 @@
-package org.serratec.projetofinal.ApiRestful.exeption;
+package org.serratec.projetofinal.ApiRestful.exception;
 
 public class SenhaException extends RuntimeException{
 	private static final long serialVersionUID = 1L;

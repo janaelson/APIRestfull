@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
-import org.serratec.projetofinal.ApiRestful.exeption.EmailException;
+import org.serratec.projetofinal.ApiRestful.exception.EmailException;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

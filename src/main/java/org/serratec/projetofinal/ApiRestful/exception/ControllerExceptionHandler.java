@@ -1,4 +1,4 @@
-package org.serratec.projetofinal.ApiRestful.exeption;
+package org.serratec.projetofinal.ApiRestful.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
