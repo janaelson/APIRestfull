@@ -46,7 +46,7 @@ public class Usuario {
 	@Column
 	private Date dataNascimento;
 	
-	@OneToMany(mappedBy = "id_usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id.usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Relacionamento> Relacionamento = new HashSet<>();
 
 	public Long getId() {

@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioInserirDTO;
-import org.serratec.projetofinal.ApiRestful.exeption.EmailException;
-import org.serratec.projetofinal.ApiRestful.exeption.SenhaException;
+import org.serratec.projetofinal.ApiRestful.exception.EmailException;
+import org.serratec.projetofinal.ApiRestful.exception.SenhaException;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
