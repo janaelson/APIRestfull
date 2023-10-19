@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
+import org.serratec.projetofinal.ApiRestful.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,24 +28,28 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@GetMapping
-    public ResponseEntity<List<Usuario>> listar() {
-        return ResponseEntity.ok(usuarioRepository.findAll());
+    public ResponseEntity<List<UsuarioDTO>> listar() {
+        return ResponseEntity.ok(usuarioService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscar(@PathVariable Long id) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-        if (usuarioOpt.isPresent()) {
-            return ResponseEntity.ok(usuarioOpt.get());
+    public ResponseEntity<UsuarioDTO> buscar(@PathVariable Long id) {
+    	UsuarioDTO usuarioDTO = usuarioService.findById(id);
+        if (usuarioDTO == null) {
+        	return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(usuarioDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> inserir(@Valid @RequestBody Usuario usuario) {
-    	usuario = usuarioRepository.save(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+    public ResponseEntity<UsuarioDTO> inserir(@Valid @RequestBody Usuario usuario) {
+    	UsuarioDTO usuarioDTO = new UsuarioDTO();
+    	usuarioDTO = usuarioService.inserir(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @PutMapping("/{id}")

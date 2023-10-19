@@ -1,10 +1,8 @@
 package org.serratec.projetofinal.ApiRestful.DTO;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.serratec.projetofinal.ApiRestful.model.Relacionamento;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 
 public class UsuarioDTO {
@@ -17,7 +15,7 @@ public class UsuarioDTO {
 
 	private Date dataNascimento;
 
-	private List<Usuario> relacionamennto;
+	private List<RelacionamentoDTO> relacionamennto;
 
 	public UsuarioDTO() {
 	}
@@ -28,10 +26,10 @@ public class UsuarioDTO {
 		this.sobrenome = usuario.getSobrenome();
 		this.email = usuario.getEmail();
 		this.dataNascimento = usuario.getDataNascimento();
-		this.relacionamennto = new ArrayList<>();
-		for (Relacionamento relacionamento : usuario.getRelacionamento()) {
-			this.relacionamennto.add(relacionamento.getId().getUsuarioseguido());
-		}
+//		this.relacionamennto = new ArrayList<>();
+//		for (Relacionamento relacionamento : usuario.getRelacionamento()) {
+//			this.relacionamennto.add(relacionamento.getId().getUsuarioseguido());
+//		}
 	}
 
 	public String getNome() {
@@ -66,12 +64,14 @@ public class UsuarioDTO {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Usuario> getRelacionamennto() {
+	public List<RelacionamentoDTO> getRelacionamennto() {
 		return relacionamennto;
 	}
 
-	public void setRelacionamennto(List<Usuario> relacionamennto) {
+	public void setRelacionamennto(List<RelacionamentoDTO> relacionamennto) {
 		this.relacionamennto = relacionamennto;
 	}
+
+
 
 }

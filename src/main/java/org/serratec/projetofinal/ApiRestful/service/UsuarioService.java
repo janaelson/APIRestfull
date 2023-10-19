@@ -5,14 +5,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
-import org.serratec.projetofinal.ApiRestful.DTO.UsuarioInserirDTO;
 import org.serratec.projetofinal.ApiRestful.exeption.EmailException;
-import org.serratec.projetofinal.ApiRestful.exeption.SenhaException;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsuarioService {
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -28,29 +29,33 @@ public class UsuarioService {
 		return usuariosDTO;
 	}
 	
-	public Optional<Usuario> findById(Long id) {
-		return usuarioRepository.findById(id);
+	public UsuarioDTO findById(Long id) {
+		Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+		if (usuarioOpt.isEmpty()) {
+			return null;
+		}
+		UsuarioDTO usuarioDTO = new UsuarioDTO(usuarioOpt.get());
+		return usuarioDTO;
 	}
 	
-	public UsuarioDTO inserir(UsuarioInserirDTO usuarioInserirDTO) throws EmailException {
-		if (!usuarioInserirDTO.getSenha().equalsIgnoreCase(usuarioInserirDTO.getConfirmaSenha())) {
-			throw new SenhaException("Senha e Confirma Senha devem ser iguais");
-		}
-		
-		Usuario usuarioEmailExistente = usuarioRepository.findByEmail(usuarioInserirDTO.getEmail());
+	public UsuarioDTO inserir(Usuario usuario) throws EmailException {
+		UsuarioDTO usuariosDTO = new UsuarioDTO();
+		Usuario usuarioEmailExistente = usuarioRepository.findByEmail(usuario.getEmail());
 		if (usuarioEmailExistente != null) {
 			throw new EmailException("Email já cadastrado.");
 		}
-		
-		Usuario usuario = new Usuario();
-		usuario.setNome(usuarioInserirDTO.getNome());
-		usuario.setEmail(usuarioInserirDTO.getEmail());
-		usuario.setSenha(usuarioInserirDTO.getSenha());
+//		RelacionamentoDTO relacionamentoDTO = new RelacionamentoDTO(); 
+		Usuario usuarios = new Usuario();
+		usuarios.setNome(usuariosDTO.getNome());
+		usuarios.setSenha(usuariosDTO.getSobrenome());
+		usuarios.setEmail(usuariosDTO.getEmail());
+		usuarios.setDataNascimento(usuariosDTO.getDataNascimento());
+//		usuario.setRelacionamento(relacionamentoDTO.getClass());
 		
 		usuario = usuarioRepository.save(usuario);
 		
-		UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
-		return usuarioDTO;
+		UsuarioDTO usuarioDto = new UsuarioDTO(usuario);
+		return usuarioDto;
 	}
 
 }

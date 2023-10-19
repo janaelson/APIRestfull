@@ -1,8 +1,8 @@
 package org.serratec.projetofinal.ApiRestful.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,8 +46,8 @@ public class Usuario {
 	@Column
 	private Date dataNascimento;
 	
-	@OneToMany(mappedBy = "id_usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Relacionamento> Relacionamento = new HashSet<>();
+	@OneToMany(mappedBy = "id.usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Relacionamento> Relacionamento = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -97,13 +97,12 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Set<Relacionamento> getRelacionamento() {
+	public List<Relacionamento> getRelacionamento() {
 		return Relacionamento;
 	}
 
-	public void setRelacionamento(Set<Relacionamento> relacionamento) {
+	public void setRelacionamento(List<Relacionamento> relacionamento) {
 		Relacionamento = relacionamento;
 	}
-	
 
 }
