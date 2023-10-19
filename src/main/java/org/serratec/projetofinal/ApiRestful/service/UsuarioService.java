@@ -18,6 +18,10 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	
+//<<<<<<< HEAD
+//=======
+//
+//>>>>>>> branch 'main' of https://github.com/janaelson/APIRestfull.git
 	
 	public List<UsuarioDTO> findAll() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
@@ -45,6 +49,16 @@ public class UsuarioService {
 		if (usuarioEmailExistente != null) {
 			throw new EmailException("Email já cadastrado.");
 		}
+//<<<<<<< HEAD
+//=======
+////		RelacionamentoDTO relacionamentoDTO = new RelacionamentoDTO(); 
+//		Usuario usuarios = usuario;
+//		usuarios.setNome(usuariosDTO.getNome());
+//		usuarios.setSenha(usuariosDTO.getSobrenome());
+//		usuarios.setEmail(usuariosDTO.getEmail());
+//		usuarios.setDataNascimento(usuariosDTO.getDataNascimento());
+////		usuario.setRelacionamento(relacionamentoDTO.getClass());
+//>>>>>>> branch 'main' of https://github.com/janaelson/APIRestfull.git
 		
 //		usuario = usuarioRepository.save(usuario);
 //		if(!usuario.getRelacionamento().isEmpty()) {
@@ -60,3 +74,4 @@ public class UsuarioService {
 	}
 
 }
+

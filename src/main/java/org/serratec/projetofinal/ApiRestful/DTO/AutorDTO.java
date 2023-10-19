@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 
-public class AuthorDTO implements Serializable {
+public class AutorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	private String nome;
 	
-	public AuthorDTO() {
+	public AutorDTO() {
 	}
 	
-	public AuthorDTO(Usuario obj) {
+	public AutorDTO(Usuario obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 	}

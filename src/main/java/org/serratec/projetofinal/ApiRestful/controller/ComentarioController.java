@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.serratec.projetofinal.ApiRestful.DTO.ComentarioDTO;
 import org.serratec.projetofinal.ApiRestful.model.Comentario;
 import org.serratec.projetofinal.ApiRestful.repository.ComentarioRepository;
+import org.serratec.projetofinal.ApiRestful.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,54 +19,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/comentario")
 public class ComentarioController {
-	
-	@Autowired
-    private ComentarioRepository comentarioRepository;
 
-	
-	@GetMapping
-    public ResponseEntity<List<Comentario>> listar() {
-        return ResponseEntity.ok(comentarioRepository.findAll());
+    @Autowired
+    private ComentarioService comentarioService;
+
+    @GetMapping
+    public ResponseEntity<List<ComentarioDTO>> listarComentariosPorPostagem(@RequestParam(name = "postagemId") Long postagemId) {
+        List<ComentarioDTO> comentarios = comentarioService.listarComentariosPorPostagem(postagemId);
+        return ResponseEntity.ok(comentarios);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Comentario> buscar(@PathVariable Long id) {
-        Optional<Comentario> comentarioOpt = comentarioRepository.findById(id);
-        if (comentarioOpt.isPresent()) {
-            return ResponseEntity.ok(comentarioOpt.get());
+    public ResponseEntity<ComentarioDTO> buscarComentarioPorId(@PathVariable Long id) {
+        ComentarioDTO comentario = comentarioService.buscarComentarioPorId(id);
+        if (comentario != null) {
+            return ResponseEntity.ok(comentario);
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<Comentario> inserir(@Valid @RequestBody Comentario comentario) {
-    	comentario = comentarioRepository.save(comentario);
+    public ResponseEntity<ComentarioDTO> inserirComentario(@RequestBody ComentarioDTO comentarioDTO) {
+        ComentarioDTO comentario = comentarioService.inserirComentario(comentarioDTO.getTexto());
         return ResponseEntity.status(HttpStatus.CREATED).body(comentario);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Comentario> atualizar(@PathVariable Long id, @Valid @RequestBody Comentario comentario) {
-        Optional<Comentario> comentarioOpt = comentarioRepository.findById(id);
-        if (comentarioOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        comentario.setId(id);
-        comentarioRepository.save(comentario);
-        return ResponseEntity.ok(comentario);
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        Optional<Comentario> comentarioOpt = comentarioRepository.findById(id);
-        if (comentarioOpt.isPresent()) {
-            comentarioRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<ComentarioDTO> atualizarComentario(@PathVariable Long id, @RequestBody ComentarioDTO comentarioDTO) {
+        ComentarioDTO comentario = comentarioService.atualizarComentario(id, comentarioDTO.getTexto());
+        if (comentario != null) {
+            return ResponseEntity.ok(comentario);
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirComentario(@PathVariable Long id) {
+        comentarioService.excluirComentario(id);
+        return ResponseEntity.noContent().build();
+    }
 }
+
