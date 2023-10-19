@@ -17,6 +17,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	
+
+	
 	public List<UsuarioDTO> findAll() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		/*
@@ -45,7 +48,7 @@ public class UsuarioService {
 			throw new EmailException("Email já cadastrado.");
 		}
 //		RelacionamentoDTO relacionamentoDTO = new RelacionamentoDTO(); 
-		Usuario usuarios = new Usuario();
+		Usuario usuarios = usuario;
 		usuarios.setNome(usuariosDTO.getNome());
 		usuarios.setSenha(usuariosDTO.getSobrenome());
 		usuarios.setEmail(usuariosDTO.getEmail());
@@ -59,3 +62,4 @@ public class UsuarioService {
 	}
 
 }
+

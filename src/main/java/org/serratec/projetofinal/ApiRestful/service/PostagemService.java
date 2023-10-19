@@ -72,7 +72,7 @@ public class PostagemService {
 
         if (postagem.getUsuario() != null) {
             Long userId = postagem.getUsuario().getId();
-            UsuarioDTO usuarioDTO = usuarioService.buscarUsuarioPorId(userId); 
+            UsuarioDTO usuarioDTO = usuarioService.findById(userId); 
             postagemDTO.setUsuario(usuarioDTO);
         }
 

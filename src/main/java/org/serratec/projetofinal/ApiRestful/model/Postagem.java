@@ -35,7 +35,7 @@ public class Postagem {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
     
-    @OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Comentario> comantarios;
 
@@ -63,5 +63,19 @@ public class Postagem {
 		this.dataCriacao = dataCriacao;
 	}
 
-    
+	 public Usuario getUsuario() {
+			return usuario;
+		}
+
+		public void setUsuario(Usuario usuario) {
+			this.usuario = usuario;
+		}
+
+		public List<Comentario> getComantarios() {
+			return comantarios;
+		}
+
+		public void setComantarios(List<Comentario> comantarios) {
+			this.comantarios = comantarios;
+		}
 }
