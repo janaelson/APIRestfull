@@ -16,7 +16,7 @@ public class Foto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id.foto")
+	@Column(name = "id_foto")
 	private Long id;
 
 	@Lob
@@ -29,7 +29,7 @@ public class Foto {
 	private String nome;
 
 	@OneToOne
-	@JoinColumn(name = "id.usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	public Foto() {
