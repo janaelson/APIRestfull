@@ -1,35 +1,37 @@
 package org.serratec.projetofinal.ApiRestful.DTO;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.serratec.projetofinal.ApiRestful.model.Relacionamento;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 
 public class UsuarioDTO {
-	private Long id;
 
 	private String nome;
 
+	private String sobrenome;
+
 	private String email;
+
+	private Date dataNascimento;
+
+	private List<Usuario> relacionamennto;
 
 	public UsuarioDTO() {
 	}
 
-	public UsuarioDTO(Long id, String nome, String email) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-	}
-
 	public UsuarioDTO(Usuario usuario) {
-		this.id = usuario.getId();
+		super();
 		this.nome = usuario.getNome();
+		this.sobrenome = usuario.getSobrenome();
 		this.email = usuario.getEmail();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.dataNascimento = usuario.getDataNascimento();
+		this.relacionamennto = new ArrayList<>();
+		for (Relacionamento relacionamento : usuario.getRelacionamento()) {
+			this.relacionamennto.add(relacionamento.getId().getUsuarioseguido());
+		}
 	}
 
 	public String getNome() {
@@ -40,6 +42,14 @@ public class UsuarioDTO {
 		this.nome = nome;
 	}
 
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -48,7 +58,20 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
+	public List<Usuario> getRelacionamennto() {
+		return relacionamennto;
+	}
+
+	public void setRelacionamennto(List<Usuario> relacionamennto) {
+		this.relacionamennto = relacionamennto;
+	}
 
 }
