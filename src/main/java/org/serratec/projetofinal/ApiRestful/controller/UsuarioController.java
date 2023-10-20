@@ -2,12 +2,16 @@ package org.serratec.projetofinal.ApiRestful.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.serratec.projetofinal.ApiRestful.DTO.RelacionamentoDTO;
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
 import org.serratec.projetofinal.ApiRestful.model.Foto;
+import org.serratec.projetofinal.ApiRestful.model.Relacionamento;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
+import org.serratec.projetofinal.ApiRestful.repository.RelacionamentoRepository;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
 import org.serratec.projetofinal.ApiRestful.service.FotoService;
 import org.serratec.projetofinal.ApiRestful.service.UsuarioService;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -33,6 +38,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private RelacionamentoRepository relacionamentoRepository;
 	
 	@Autowired
 	private FotoService fotoService;
@@ -68,6 +76,12 @@ public class UsuarioController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/seguidores/{id}")
+    public ResponseEntity<List<RelacionamentoDTO>> buscarRelacionamento(@PathVariable Long id ) {
+		List<Relacionamento> seguidores = relacionamentoRepository.buscarRelacionamentos(id);
+		List<RelacionamentoDTO> relacionamentoDTO = seguidores.stream().map(relacionamento -> new RelacionamentoDTO(relacionamento)).collect(Collectors.toList());
+		return ResponseEntity.ok(relacionamentoDTO);  
     }
 
     @DeleteMapping("/{id}")
