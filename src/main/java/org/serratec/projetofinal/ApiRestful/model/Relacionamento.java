@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 
 import javax.persistence.Table;
 
+import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
+
 @Entity
 @Table(name = "relacionamento")
 public class Relacionamento {
@@ -18,13 +20,16 @@ public class Relacionamento {
 
 	@Column(name = "data_inicio")
 	private LocalDate dataInicio;
+	
+	@Column(name = "foto_url")
+    private String fotoUrl; 
 
 	public Relacionamento() {
-		super();
+		
 	}
 
 	public Relacionamento(Usuario usuario, Usuario usuarioseguido) {
-		super();
+		
 		this.id.setUsuario(usuario);
 		this.id.setUsuarioseguido(usuarioseguido);
 		this.dataInicio = LocalDate.now();
@@ -45,5 +50,18 @@ public class Relacionamento {
 	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
+	
+	public String getFotoUrl() {
+	        return fotoUrl;
+	}
 
-}
+	public void setFotoUrl(String fotoUrl) {
+	        this.fotoUrl = fotoUrl;
+	}
+
+	public UsuarioDTO getUsuarioDTO() {
+		
+		return null;
+	}
+}   
+	

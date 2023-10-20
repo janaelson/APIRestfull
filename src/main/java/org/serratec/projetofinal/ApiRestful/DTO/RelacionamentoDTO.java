@@ -9,16 +9,18 @@ public class RelacionamentoDTO {
 	private UsuarioDTO usuarioDTO;
 
 	private LocalDate dataInicio;
+	
+	private String url;
 
 	public RelacionamentoDTO() {
 		super();
 	}
 
-	public RelacionamentoDTO(Relacionamento relacionamento) {
-		super();
-		this.usuarioDTO = new UsuarioDTO (relacionamento.getId().getUsuario());
-		this.dataInicio = relacionamento.getDataInicio();
-		
+	public RelacionamentoDTO(Relacionamento relacionamento, String url) {
+	    super();
+	    this.usuarioDTO = new UsuarioDTO(relacionamento.getId().getUsuario());
+	    this.dataInicio = relacionamento.getDataInicio();
+	    this.setUrl(url);
 	}
 
 	public UsuarioDTO getUsuarioDTO() {
@@ -35,6 +37,14 @@ public class RelacionamentoDTO {
 
 	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

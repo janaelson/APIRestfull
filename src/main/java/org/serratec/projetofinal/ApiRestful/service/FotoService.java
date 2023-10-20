@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.serratec.projetofinal.ApiRestful.model.Foto;
+import org.serratec.projetofinal.ApiRestful.model.Relacionamento;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.FotoRepository;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
@@ -21,6 +22,10 @@ public class FotoService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	public String inserir(Relacionamento relacionamento, MultipartFile file) {
+		return null;
+	}
 	
 	public Foto inserir(Usuario usuario, MultipartFile file) throws IOException {
 		Foto foto = new Foto();
@@ -48,5 +53,5 @@ public class FotoService {
 		
 		return fotoOpt.get();
 	}
-	
+
 }

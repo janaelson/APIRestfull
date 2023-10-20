@@ -71,7 +71,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
-		
+
+        <dependency>
+        	<groupId>org.serratec.backend</groupId>
+        	<artifactId>projeto-service-dto</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 
 	<build>
