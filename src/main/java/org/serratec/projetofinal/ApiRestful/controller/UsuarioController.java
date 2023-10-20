@@ -6,10 +6,13 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.serratec.projetofinal.ApiRestful.DTO.UsuarioDTO;
+import org.serratec.projetofinal.ApiRestful.model.Foto;
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
 import org.serratec.projetofinal.ApiRestful.repository.UsuarioRepository;
+import org.serratec.projetofinal.ApiRestful.service.FotoService;
 import org.serratec.projetofinal.ApiRestful.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +33,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private FotoService fotoService;
 	
 	@GetMapping
     public ResponseEntity<List<UsuarioDTO>> listar() {
@@ -73,5 +79,14 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+    
+    @GetMapping("/{id}/foto")
+	public ResponseEntity<byte[]> buscarFoto(@PathVariable Long id) {
+		Foto foto = fotoService.buscarPorIdUsuario(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.CONTENT_TYPE, foto.getTipo());
+		headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(foto.getDados().length));
+		return new ResponseEntity<>(foto.getDados(), headers, HttpStatus.OK);
+	}
 }
 

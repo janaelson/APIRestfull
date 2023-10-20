@@ -1,13 +1,8 @@
 package org.serratec.projetofinal.ApiRestful.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.serratec.projetofinal.ApiRestful.DTO.ComentarioDTO;
-import org.serratec.projetofinal.ApiRestful.model.Comentario;
-import org.serratec.projetofinal.ApiRestful.repository.ComentarioRepository;
 import org.serratec.projetofinal.ApiRestful.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
