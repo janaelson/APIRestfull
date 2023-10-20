@@ -1,6 +1,7 @@
 package org.serratec.projetofinal.ApiRestful.DTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.serratec.projetofinal.ApiRestful.model.Usuario;
@@ -26,7 +27,7 @@ public class UsuarioDTO {
 		this.sobrenome = usuario.getSobrenome();
 		this.email = usuario.getEmail();
 		this.dataNascimento = usuario.getDataNascimento();
-//		this.relacionamennto = new ArrayList<>();
+		this.relacionamennto = new ArrayList<>();
 //		for (Relacionamento relacionamento : usuario.getRelacionamento()) {
 //			this.relacionamennto.add(relacionamento.getId().getUsuarioseguido());
 //		}
@@ -71,7 +72,5 @@ public class UsuarioDTO {
 	public void setRelacionamennto(List<RelacionamentoDTO> relacionamennto) {
 		this.relacionamennto = relacionamennto;
 	}
-
-
-
+	
 }

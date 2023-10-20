@@ -18,10 +18,7 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	
-//<<<<<<< HEAD
-//=======
-//
-//>>>>>>> branch 'main' of https://github.com/janaelson/APIRestfull.git
+
 	
 	public List<UsuarioDTO> findAll() {
 		List<Usuario> usuarios = usuarioRepository.findAll();
@@ -45,21 +42,17 @@ public class UsuarioService {
 	}
 	
 	public UsuarioDTO inserir(Usuario usuario) throws EmailException {
+		UsuarioDTO usuariosDTO = new UsuarioDTO();
 		Usuario usuarioEmailExistente = usuarioRepository.findByEmail(usuario.getEmail());
 		if (usuarioEmailExistente != null) {
 			throw new EmailException("Email já cadastrado.");
 		}
-//<<<<<<< HEAD
-//=======
-////		RelacionamentoDTO relacionamentoDTO = new RelacionamentoDTO(); 
-//		Usuario usuarios = usuario;
-//		usuarios.setNome(usuariosDTO.getNome());
-//		usuarios.setSenha(usuariosDTO.getSobrenome());
-//		usuarios.setEmail(usuariosDTO.getEmail());
-//		usuarios.setDataNascimento(usuariosDTO.getDataNascimento());
-////		usuario.setRelacionamento(relacionamentoDTO.getClass());
-//>>>>>>> branch 'main' of https://github.com/janaelson/APIRestfull.git
-		
+		usuariosDTO.setNome(usuario.getNome());
+		usuariosDTO.setSobrenome(usuario.getSobrenome());
+		usuariosDTO.setEmail(usuario.getEmail());
+		usuariosDTO.setDataNascimento(usuario.getDataNascimento());
+		usuariosDTO.setNome(usuario.getNome());
+						
 //		usuario = usuarioRepository.save(usuario);
 //		if(!usuario.getRelacionamento().isEmpty()) {
 //			for(Relacionamento rela: usuario.getRelacionamento()) {
@@ -69,8 +62,7 @@ public class UsuarioService {
 //			}
 //		}
 		usuario = usuarioRepository.save(usuario);
-		UsuarioDTO usuarioDto = new UsuarioDTO(usuario);
-		return usuarioDto;
+		return usuariosDTO;
 	}
 
 }

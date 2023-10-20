@@ -16,7 +16,7 @@ public class RelacionamentoDTO {
 
 	public RelacionamentoDTO(Relacionamento relacionamento) {
 		super();
-		this.usuarioDTO = new UsuarioDTO (relacionamento.getId().getUsuario());
+		this.usuarioDTO = new UsuarioDTO (relacionamento.getId().getUsuarioseguido());
 		this.dataInicio = relacionamento.getDataInicio();
 		
 	}
